@@ -89,6 +89,7 @@
       - [docker启动nginx](#docker启动nginx)
       - [docker启动nexus 关联本地数据](#docker启动nexus-关联本地数据)
       - [docker启动gitlab](#docker启动gitlab)
+      - [docker安装iredmail](#docker安装iredmail)
   - [代码开发相关](#代码开发相关)
     - [小于等于转义](#小于等于转义)
     - [微信公众号code跳转](#微信公众号code跳转)
@@ -791,7 +792,49 @@ user.password_confirmation = 'secret_pass'
 user.save!
 
 ```
+#### docker安装iredmail
+```
+touch iredmail-docker.conf
 
+echo HOSTNAME=mail.ulane.cn >> iredmail-docker.conf
+echo FIRST_MAIL_DOMAIN=ulane.cn >> iredmail-docker.conf
+echo FIRST_MAIL_DOMAIN_ADMIN_PASSWORD=邮箱管理员密码 >> iredmail-docker.conf
+echo MYSQL_ROOT_PASSWORD=数据库密码 >> iredmail-docker.conf
+echo MLMMJADMIN_API_TOKEN=$(openssl rand -base64 32) >> iredmail-docker.conf
+echo ROUNDCUBE_DES_KEY=$(openssl rand -base64 24) >> iredmail-docker.conf
+
+mkdir -p data/{backup,clamav,custom,imapsieve_copy,mailboxes,mlmmj,mlmmj-archive,mysql,sa_rules,ssl,postfix_queue}
+
+docker pull iredmail/mariadb:stable
+
+docker run \
+    --privileged \
+    --rm \
+    --name iredmail \
+    --env-file iredmail-docker.conf \
+    --hostname mail.ulane.cn \
+    -p 80:80 \
+    -p 443:443 \
+    -p 110:110 \
+    -p 995:995 \
+    -p 143:143 \
+    -p 993:993 \
+    -p 25:25 \
+    -p 465:465 \
+    -p 587:587 \
+    -v /root/docker_link/iredmail/data/backup:/var/vmail/backup \
+    -v /root/docker_link/iredmail/data/mailboxes:/var/vmail/vmail1 \
+    -v /root/docker_link/iredmail/data/mlmmj:/var/vmail/mlmmj \
+    -v /root/docker_link/iredmail/data/mlmmj-archive:/var/vmail/mlmmj-archive \
+    -v /root/docker_link/iredmail/data/imapsieve_copy:/var/vmail/imapsieve_copy \
+    -v /root/docker_link/iredmail/data/custom:/opt/root/docker_link/iredmail/custom \
+    -v /root/docker_link/iredmail/data/ssl:/opt/root/docker_link/iredmail/ssl \
+    -v /root/docker_link/iredmail/data/mysql:/var/lib/mysql \
+    -v /root/docker_link/iredmail/data/clamav:/var/lib/clamav \
+    -v /root/docker_link/iredmail/data/sa_rules:/var/lib/spamassassin \
+    -v /root/docker_link/iredmail/data/postfix_queue:/var/spool/postfix \
+    iredmail/mariadb:stable
+```
 
 ## 代码开发相关
 ### 小于等于转义
