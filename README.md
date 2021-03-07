@@ -132,9 +132,9 @@ nohup frp_0.33.0_linux_amd64/frps -c frp_0.33.0_linux_amd64/frps.ini &
 ```
 grep -r -l 'content...' ./transaction-all-2020-07-16*
 find ./transaction-all-2020-07-16* -type f |xargs grep -l 'content'
-查找以t开头的文件 find的结果会带有./开头, 按name查找可忽略,但-regex无法忽略
+查找以t开头的文件 find的结果会带有./开头, 按-name查找可忽略,但-regex无法忽略
 find ./ -regex "\.\/t.*"
-grep筛选文件内容
+grep筛选文件内容a
 grep -a "04-11" catalina.out > catalina.2018-04-11.out
 ```
 
