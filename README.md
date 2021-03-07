@@ -127,7 +127,10 @@ journalctl --vacuum-time=30d<br/>
 journalctl --vacuum-size=1G
 
 ### frp启动
-nohup frp_0.33.0_linux_amd64/frps -c frp_0.33.0_linux_amd64/frps.ini &
+```
+nohup frp_0.35.1_linux_amd64/frps -c frp_0.35.1_linux_amd64/frps.ini > frps.log 2>&1 &
+nohup frp_0.35.1_linux_amd64/frpc -c frp_0.35.1_linux_amd64/frpc.ini > frpc.log 2>&1 &
+```
 
 ### linux查找筛选文件
 ```
