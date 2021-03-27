@@ -1,6 +1,8 @@
 - [notebook-linux](#notebook-linux)
   - [基本命令](#基本命令)
     - [更新jar包文件](#更新jar包文件)
+    - [tar zip](#tar-zip)
+    - [ftp sftp远程连接](#ftp-sftp远程连接)
     - [linux时区](#linux时区)
     - [ssh远程连接](#ssh远程连接)
     - [清理进程占用文件](#清理进程占用文件)
@@ -107,11 +109,38 @@
 # notebook-linux
 ## 基本命令
 ### 更新jar包文件
-jar -xvf novel-front-2.9.0.jar<br/>
-jar -uvf novel-front-2.9.0.jar BOOT-INF/classes/<br/>
-或<br/>
-unzip novel-front-2.9.0.jar<br/>
-zip -uvr novel-front-2.9.0.jar BOOT-INF/ META-INF/ org/
+```
+jar -xvf novel-front-2.9.0.jar
+jar -uvf novel-front-2.9.0.jar BOOT-INF/classes/
+或
+unzip novel-front-2.9.0.jar
+// 后续为指定多文件夹一起压缩 更新-详情-递归
+zip -rv novel-front-2.9.0.jar BOOT-INF/ META-INF/ org/
+```
+
+### tar zip
+```
+//压缩时，压缩路径参数从哪里开始，压缩包里面就是什么路径
+tar -cvf testfile.tar ./testfile/
+tar -xvf testfile.tar -C testfileto/
+zip -rv testfile.zip ./testfile/
+unzip -o testfile.zip -d fileto/
+```
+
+### ftp sftp远程连接
+```
+sftp admin@host -P22
+->password
+cd ~~~
+ls -lrt
+get filename*
+put filename*
+
+ftp host 2121
+->username
+->password
+get、put、delete
+```
 
 ### linux时区
 timedatectl set-timezone 'Asia/Shanghai'
