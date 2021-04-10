@@ -33,6 +33,7 @@
     - [linux隐藏顶栏底栏](#linux隐藏顶栏底栏)
   - [git](#git)
     - [gitlab安装](#gitlab安装)
+    - [git更新覆盖本地](#git更新覆盖本地)
   - [tomcat](#tomcat)
     - [tomcat静态资源配置](#tomcat静态资源配置)
     - [tomcat启动隐藏](#tomcat启动隐藏)
@@ -329,6 +330,11 @@ nohup gitlab-ctl reconfigure &
 gitlab-ctl stop
 ```
 
+### git更新覆盖本地
+```
+git fetch --all
+git reset --hard origin/master
+```
 ## tomcat
 ### tomcat静态资源配置
 ```
@@ -469,8 +475,10 @@ kill [processlist id]
 begin; commit;
 
 ### mysqldump表复制和备份
-mysqldump --debug-info -uroot -proot@123#@! test tablename | mysql -h 211.159.185.18 -P3306 -C -uroot -p0123456 test<br/>
+```
+mysqldump --debug-info -uroot -proot@123#@! test tablename | mysql -h 211.159.185.18 -P3306 -C -uroot -p0123456 test
 mysqldump -uroot -p"root@135%^&" novel_plus > ./backup/backdb.sql
+```
 
 ### mysql查询修改编码及排序规则
 ```
