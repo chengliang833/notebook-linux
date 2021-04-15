@@ -33,6 +33,7 @@
     - [linux界面和命令行启动](#linux界面和命令行启动)
     - [rpm安装卸载](#rpm安装卸载)
     - [linux隐藏顶栏底栏](#linux隐藏顶栏底栏)
+    - [linux改host](#linux改host)
   - [git](#git)
     - [gitlab安装](#gitlab安装)
     - [git更新覆盖本地](#git更新覆盖本地)
@@ -172,6 +173,11 @@ find ./transaction-all-2020-07-16* -type f |xargs grep -l 'content'
 find ./ -regex "\.\/t.*"
 grep筛选文件内容a
 grep -a "04-11" catalina.out > catalina.2018-04-11.out
+
+//查询内容所在行数
+grep -n "04-11" catalina.out
+//100-200行
+sed -n '100,200p' catalina.out > catalina.100p200p.out
 ```
 
 ### 查看内存占用top10
@@ -347,6 +353,11 @@ sudo gedit /usr/share/gnome-shell/theme/gnome-classic.css
 //底栏
 删除目录/usr/share/gnome-shell/extensions/window-list@gnome-shell-extensions.gcampax.github.com
 重启gnome
+```
+
+### linux改host
+```
+vi /etc/hosts
 ```
 
 ## git
