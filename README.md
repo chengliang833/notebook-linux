@@ -25,7 +25,6 @@
     - [下载文件](#下载文件)
     - [项目后台启动](#项目后台启动)
     - [linux查看运行内存,清理内存](#linux查看运行内存清理内存)
-    - [svn启动](#svn启动)
     - [防火墙](#防火墙)
     - [curl post](#curl-post)
     - [g++ gcc](#g-gcc)
@@ -100,6 +99,9 @@
     - [base64图片](#base64图片)
   - [eclipse](#eclipse)
     - [eclipse布局](#eclipse布局)
+    - [svn](#svn)
+      - [启动](#启动)
+      - [下载](#下载)
   - [其他服务](#其他服务)
     - [httpd配置](#httpd配置)
     - [redis](#redis)
@@ -275,9 +277,6 @@ nohup [command] &
 cat /proc/meminfo |grep MemAvailable |awk '{print $2}'
 echo 1 > /proc/sys/vm/drop_caches
 ```
-
-### svn启动
-svnserve -d -r /install/svn/project
 
 ### 防火墙
 ```
@@ -959,6 +958,21 @@ class "GtkButton" style "compact2"
 class "GtkToolbar" style "compact2"
 class "GtkPaned" style "compact2"
 ---
+```
+
+
+### svn
+#### 启动
+```
+svnserve -d -r /install/svn/project
+```
+
+#### 下载
+```
+//注意子路径下带.的需要转移\.
+svn checkout https://a.com...
+//更新
+svn update [path]
 ```
 
 ## 其他服务
