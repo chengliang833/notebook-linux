@@ -33,6 +33,7 @@
     - [rpm安装卸载](#rpm安装卸载)
     - [linux隐藏顶栏底栏](#linux隐藏顶栏底栏)
     - [linux改host](#linux改host)
+    - [linux改换行符](#linux改换行符)
   - [git](#git)
     - [gitlab安装](#gitlab安装)
     - [git更新覆盖本地](#git更新覆盖本地)
@@ -131,6 +132,11 @@ tar -cvf testfile.tar ./testfile/
 tar -xvf testfile.tar -C testfileto/
 zip -rv testfile.zip ./testfile/
 unzip -o testfile.zip -d fileto/
+
+//tar gz分卷压缩
+tar -zcvf - 20210423/ |split -b 45m - 20210423.tar.gz
+cat 20210423.tar.gz* > 20210423.tar.gz
+cat 20210423.tar.gz* | tar -zxv
 ```
 
 ### ftp sftp远程连接
@@ -357,6 +363,11 @@ sudo gedit /usr/share/gnome-shell/theme/gnome-classic.css
 ### linux改host
 ```
 vi /etc/hosts
+```
+
+### linux改换行符
+```
+sed -i 's/\r$//' filename.sh
 ```
 
 ## git
