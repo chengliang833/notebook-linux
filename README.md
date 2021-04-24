@@ -763,8 +763,9 @@ docker run -itd -p 2181:2181 -v /root/docker_link/zookeeper/data:/data \
 
 #### docker启动nginx
 ```
-docker run -itd -p 80:80 -p 443:443 \
+docker run -itd -p 80:80 -p 443:443 -e TZ="Asia/Shanghai" \
 -v /root/docker_link/nginx/nginx.conf:/etc/nginx/nginx.conf \
+-v /root/docker_link/nginx/conf.d:/etc/nginx/conf.d \
 -v /root/docker_link/nginx/CA.pem:/home/nginx/CA.pem \
 -v /root/docker_link/nginx/CA_no_pwd.key:/home/nginx/CA_no_pwd.key \
 -v /root/docker_link/nginx/www:/home/nginx/www \
