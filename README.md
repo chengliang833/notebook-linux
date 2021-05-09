@@ -94,6 +94,7 @@
       - [docker启动nexus 关联本地数据](#docker启动nexus-关联本地数据)
       - [docker启动gitlab](#docker启动gitlab)
       - [docker安装iredmail](#docker安装iredmail)
+      - [docker 安装v2ray](#docker-安装v2ray)
   - [代码开发相关](#代码开发相关)
     - [小于等于转义](#小于等于转义)
     - [微信公众号code跳转](#微信公众号code跳转)
@@ -898,6 +899,14 @@ docker run \
     -v /root/docker_link/iredmail/data/sa_rules:/var/lib/spamassassin \
     -v /root/docker_link/iredmail/data/postfix_queue:/var/spool/postfix \
     iredmail/mariadb:stable
+```
+
+#### docker 安装v2ray
+```
+//可能关联无法成功，外部目录也需要改: -v /etc/v2ray:/etc/v2ray
+docker run -d -p 8888:80 \
+-v /root/docker_link/v2ray/v2ray:/etc/v2ray \
+--name v2ray v2ray/official v2ray -config=/root/docker_link/v2ray/v2ray/config.json
 ```
 
 ## 代码开发相关
