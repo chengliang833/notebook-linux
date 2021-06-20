@@ -153,6 +153,17 @@ ftp host 2121
 ->username
 ->password
 get、put、delete
+
+ftp -n << EOF
+open 176.122.134.186 2121
+user useranme password
+#关闭mget交互
+prompt
+#安装包压缩包这些必须用二进制传输
+binary
+mget oracle-instantclient-sqlplus-21.1.0.0.0-1.x86_64.rpm
+bye
+EOF
 ```
 
 ### linux时区
