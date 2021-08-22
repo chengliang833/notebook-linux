@@ -71,6 +71,7 @@
     - [mysql远程登录](#mysql远程登录)
   - [python](#python)
     - [python3别名](#python3别名)
+    - [切换默认版本](#切换默认版本)
   - [docker](#docker)
     - [docker启动](#docker启动)
     - [docker浏览 搜索 下载 删除镜像，容器](#docker浏览-搜索-下载-删除镜像容器)
@@ -250,9 +251,13 @@ openssl req -new -x509 -newkey rsa:1024 -keyout CA.key -out CA.pem<br/>
 openssl rsa -in CA.key  -out CA_no_pwd.key
 
 ### linux定时任务
+```
 crontab -e
+//每分钟执行一次
 */1 * * * * /root/tomcat/apache-tomcat-9.0.13/bin/cutlog.sh
+//每天0点0分
 0 0 * * * /home/ubui_dev/tomcat/cutlog.sh
+```
 
 ### linux删除7分钟之前的日志
 {}有的系统要加双引号有的不要加, {}与分号之间必须有空格<br/>
@@ -268,7 +273,11 @@ speedtest-cli/speedtest.py
 ```
 
 ### scp复制下载
+```
+文件夹 -r
 scp -P 27721 root@74.82.211.36:/root/redis/redis-5.0.0.tar.gz download/
+源路径和目标路径反过来也可以，即在源服务器上操作
+```
 
 ### 分割合并文件
 ```split -b 10m file.name [prefix]
@@ -316,6 +325,7 @@ curl -k http://a/b -X POST -H 'Content-Type:application/json' -d@a.txt
 
 //sh形式
 #!/bin/sh
+echo $(date "+%s%3N")
 echo $(date "+%Y%m%d%H%M%S")
 curl -k -X POST -H 'Content-Type:application/json' \
   -d @- 'http://a/b' <<a.txt
@@ -600,10 +610,12 @@ mysql -h 211.159.185.18 -u root -p -P 3306
 ### python3别名
 alias ipython3='python3 -m IPython'
 
-
-
-
-
+### 切换默认版本
+```
+安装python3
+cd /usr/bin
+ln -s python3 python
+```
 
 
 
