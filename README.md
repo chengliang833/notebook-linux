@@ -119,8 +119,10 @@
 ## 基本命令
 ### 更新jar包文件
 ```
+//  -uvf0 不压缩lib下的jar包
 jar -xvf novel-front-2.9.0.jar
 jar -uvf novel-front-2.9.0.jar BOOT-INF/classes/
+jar -cvfm0 novel-front-2.9.0.jar BOOT-INF/ META-INF/ org/
 或
 unzip novel-front-2.9.0.jar
 // 后续为指定多文件夹一起压缩 更新-详情-递归
@@ -260,8 +262,11 @@ crontab -e
 ```
 
 ### linux删除7分钟之前的日志
+```
 {}有的系统要加双引号有的不要加, {}与分号之间必须有空格<br/>
 find /root/tomcat/apache-tomcat-9.0.13/logs -cmin +7 -type f -name "catalina.out.2*" -exec rm -rf {} \;
+find /root/tomcat/apache-tomcat-9.0.13/logs -mtime +7 -type f -name "catalina.out.2*" -exec tar -zcPvf catalina.${cusdate}.tar.gz {} \;
+```
 
 ### linux测试网速
 ```
@@ -720,28 +725,36 @@ db.auth("novel","a123456");
 #### docker启动oracle
 ```
 docker run -d -p 1521:1521 --name oracle11g registry.cn-hangzhou.aliyuncs.com/helowin/oracle_11g
-进sql
+
+docker cp oracle11g:/etc/profile ./
+改profile
 /etc/profile最后添加
 export ORACLE_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_2
 export ORACLE_SID=helowin
-export PATH=$ORACLE_HOME/bin:$install -m 755 -o root -g root instantclient_21_1/libomsodm.so /usr/lib/oracle/21/client64/lib/libomsodm.so
+export PATH=$ORACLE_HOME/bin:$PATH
 export NLS_LANG=AMERICAN_AMERICA.AL32UTF8
+//export PATH=$ORACLE_HOME/bin:$install -m 755 -o root -g root instantclient_21_1/libomsodm.so /usr/lib/oracle/21/client64/lib/libomsodm.so
 //NLS_LANG客户端必须设置，否则执行sql输入输出中文乱码
 //unset 临时删除
+docker cp ./profile oracle11g:/etc/
+
+docker exec -it oracle11g /bin/bash
+su root
+//password ***
+source /etc/profile
+su - oracle
+mkdir tablespace
+sqlplus / as sysdba
 
 create tablespace ULANE datafile '/home/oracle/tablespace/ULANE.DBF' size 100M AUTOEXTEND ON NEXT 100M;
+create tablespace ULANE_IDX datafile '/home/oracle/tablespace/ULANE_IDX.DBF' size 100M AUTOEXTEND ON NEXT 100M;
 create user ulane identified by password DEFAULT TABLESPACE ULANE;
--- alter user ulane default tablespace ULANE;
+//alter user ulane default tablespace ULANE;
 grant connect,resource,dba to ulane;
 //创建错误重来
 DROP TABLESPACE ULANE INCLUDING CONTENTS AND DATAFILES ;
+
 //改密码
-docker exec -it oracle11g /bin/bash
-su root
-password ***
-source /etc/profile
-su oracle
-sqlplus / as sysdba
 alter user ulane identified by abc;
 
 ```
