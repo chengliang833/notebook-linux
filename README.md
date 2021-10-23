@@ -551,7 +551,8 @@ begin; commit;
 ### mysqldump表复制和备份
 ```
 mysqldump --debug-info -uroot -proot@123#@! test tablename | mysql -h 211.159.185.18 -P3306 -C -uroot -p0123456 test
-mysqldump -uroot -p"root@135%^&" novel_plus > ./backup/backdb.sql
+mysqldump -uroot -p'root@135%^&' novel_plus > /home/novel_plus_bk0905.sql
+source novel_plus_bk0905
 ```
 
 ### mysql查询修改编码及排序规则
@@ -625,11 +626,15 @@ systemctl start docker<br/>
 systemctl enable docker
 
 ### docker浏览 搜索 下载 删除镜像，容器
-docker images<br/>
-docker search<br/>
-docker pull<br/>
+```
+docker images
+docker search
+docker pull
 docker rmi hub.c.163.com/library/tomcat:9.0
 docker rm dtomcat
+//添加dockerfile到本地镜像 最后的.表示当前路径
+docker build -t ulane/notify:1.0 .
+```
 
 ### docker查看日志
 docker logs -f -t --tail 100 nginx
