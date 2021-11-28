@@ -55,6 +55,7 @@
     - [依赖检查](#依赖检查)
     - [加入本地maven仓库](#加入本地maven仓库)
     - [发布在线maven包](#发布在线maven包)
+    - [项目单独配置仓库](#项目单独配置仓库)
   - [数据库](#数据库)
     - [oracle](#oracle)
       - [oracle->mysql文件结构转换](#oracle-mysql文件结构转换)
@@ -375,6 +376,8 @@ init 5 切换到桌面
 ```
 rpm -ivh [].rpm
 rpm -e [tab tab]
+//检查是否安装
+rpm -qa | grep [filename]
 ```
 
 ### linux隐藏顶栏底栏
@@ -496,6 +499,37 @@ mvn install:install-file -Dfile=G:\ojdbc14-1.0.jar -DgroupId=com.oracle -Dartifa
 mvn deploy:deploy-file -DgroupId=top.ulane -DartifactId=jdbc -Dversion=0.0.1-SNAPSHOT -Dpackaging=jar -Dfile=D:\Develop\Install\eclipse_pristine\workspace\jdbc\target\jdbc.jar -Durl=http://username:password@nexus.ulane.top/nexus/content/repositories/snapshots
 ```
 
+### 项目单独配置仓库
+```
+pom.xml文件增加
+<repositories>
+    <repository>
+        <id>public</id>
+        <name>aliyun nexus</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        <!-- <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots> -->
+    </repository>
+</repositories>
+
+<pluginRepositories>
+    <pluginRepository>
+        <id>public</id>
+        <name>aliyun nexus</name>
+        <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        <!-- <releases>
+            <enabled>true</enabled>
+        </releases>
+        <snapshots>
+            <enabled>true</enabled>
+        </snapshots> -->
+    </pluginRepository>
+</pluginRepositories>
+```
 
 ## 数据库
 ### oracle
