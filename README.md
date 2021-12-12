@@ -233,7 +233,7 @@ V选中范围 :s/旧文本/新文本/g
 /gc confirm
 删除第9行到当前行内容：9, .d
 撤销 u
-前进 ctrl+y
+前进 ctrl+r
 ```
 ### 清除文件内容
 \> filename
@@ -540,7 +540,7 @@ float\((\d*)\) -> float\($1\,0)
 ```
 //sqlplus
 basic和sqlplus客户端下载安装
-sqlplus ulane/******#@******:1521/helowinXDB
+sqlplus ulane/password@host:1521/helowinXDB
 //sqlldr客户端
 下载tools包直接安装
 //21版本包打包有误,需要下载zip包重新解压关联
