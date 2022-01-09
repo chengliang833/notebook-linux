@@ -250,8 +250,10 @@ service postfix stop<br/>
 chkconfig postfix off
 
 ### https openssl生成证书
-openssl req -new -x509 -newkey rsa:1024 -keyout CA.key -out CA.pem<br/>
+```
+openssl req -new -x509 -newkey rsa:2048 -keyout CA.key -out CA.pem
 openssl rsa -in CA.key  -out CA_no_pwd.key
+```
 
 ### linux定时任务
 ```
@@ -865,12 +867,13 @@ docker run -itd -p 2181:2181 -v /root/docker_link/zookeeper/data:/data \
 docker run -itd -p 80:80 -p 443:443 -e TZ="Asia/Shanghai" \
 -v /root/docker_link/nginx/nginx.conf:/etc/nginx/nginx.conf \
 -v /root/docker_link/nginx/conf.d:/etc/nginx/conf.d \
+-v /root/docker_link/nginx/streamconf.d:/etc/nginx/streamconf.d \
 -v /root/docker_link/nginx/CA.pem:/home/nginx/CA.pem \
 -v /root/docker_link/nginx/CA_no_pwd.key:/home/nginx/CA_no_pwd.key \
 -v /root/docker_link/nginx/www:/home/nginx/www \
 -v /data/download:/home/nginx/download \
 --privileged --net=host \
---name nginx nginx:1.14.2
+--name nginx nginx:1.21.5
 
 docker run -itd -p 80:80 -p 443:443 -e TZ="Asia/Shanghai" \
 -v /data/nginx/nginx.conf:/etc/nginx/nginx.conf \
