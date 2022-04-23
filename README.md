@@ -1113,7 +1113,7 @@ redis-5.0.0/utils/create-cluster
 ```
 
 #### redis单机启停
-nohub src/redis-server ./redis.conf &
+nohup src/redis-server ./redis.conf &
 src/redis-cli -p 6379 shutdown
 
 #### redis查看
