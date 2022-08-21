@@ -146,7 +146,7 @@ cat 20210423.tar.gz* | tar -zxv
 
 ### ftp sftp远程连接
 ```
-sftp admin@host -P22
+sftp -oPort=22 admin@host
 ->password
 cd ~~~
 ls -lrt
@@ -797,14 +797,14 @@ alter user ulane identified by abc;
 
 #### docker启动mysql 关联本地数据
 ```
-docker run -itd -p 3306:3306 -e TZ=Asia/Shanghai -e MYSQL_ROOT_PASSWORD=password \
+docker run -itd -p 3306:3306 -e TZ=Asia/Shanghai -e MYSQL_ROOT_PASSWORD='password' \
 --privileged=true \
 -v /root/docker_link/mysql/conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf \
 -v /root/docker_link/mysql/logs:/var/log \
 -v /root/docker_link/mysql/data:/var/lib/mysql \
 --restart always --name mysql mysql:5.6
 
-docker run -itd -p 3308:3306 -e TZ=Asia/Shanghai -e MYSQL_ROOT_PASSWORD=password \
+docker run -itd -p 3308:3306 -e TZ=Asia/Shanghai -e MYSQL_ROOT_PASSWORD='password' \
 -v /root/docker_link/mysqlslave/conf/mysql.cnf:/etc/mysql/conf.d/mysql.cnf \
 -v /root/docker_link/mysqlslave/logs:/var/log \
 -v /root/docker_link/mysqlslave/data:/var/lib/mysql \
