@@ -15,7 +15,6 @@
     - [vi操作](#vi操作)
     - [清除文件内容](#清除文件内容)
     - [服务关闭开机自启](#服务关闭开机自启)
-    - [25端口postfix关闭](#25端口postfix关闭)
     - [https openssl生成证书](#https-openssl生成证书)
     - [linux定时任务](#linux定时任务)
     - [linux删除7分钟之前的日志](#linux删除7分钟之前的日志)
@@ -34,6 +33,9 @@
     - [linux隐藏顶栏底栏](#linux隐藏顶栏底栏)
     - [linux改host](#linux改host)
     - [linux改换行符](#linux改换行符)
+    - [linux关闭服务](#linux关闭服务)
+      - [25端口postfix关闭](#25端口postfix关闭)
+      - [cups关闭](#cups关闭)
   - [git](#git)
     - [gitlab安装](#gitlab安装)
     - [git更新覆盖本地](#git更新覆盖本地)
@@ -245,9 +247,6 @@ chkconfig qemukvmga off
 systemctl list-unit-files
 systemctl list-dependencies [target]
 ```
-### 25端口postfix关闭
-service postfix stop<br/>
-chkconfig postfix off
 
 ### https openssl生成证书
 ```
@@ -402,6 +401,19 @@ vi /etc/hosts
 sed -i 's/\r$//' filename.sh
 ```
 
+### linux关闭服务
+#### 25端口postfix关闭
+service postfix stop<br/>
+chkconfig postfix off
+
+#### cups关闭
+```
+service cups stop
+chmod 000 /usr/sbin/cupsd
+```
+
+
+
 ## git
 ### gitlab安装
 ```
@@ -544,6 +556,7 @@ float\((\d*)\) -> float\($1\,0)
 basic和sqlplus客户端下载安装
 sqlplus ulane/password@host:1521/helowinXDB
 //sqlldr客户端
+sqlldr ulane/password@host:1521/helowinXDB control=test.ctl data=loader.txt
 下载tools包直接安装
 //21版本包打包有误,需要下载zip包重新解压关联
 install -m 755 -o root -g root instantclient_21_1/libomsodm.so /usr/lib/oracle/21/client64/lib/libomsodm.so
@@ -1137,7 +1150,6 @@ sbin/nginx -s reload
 
 #### nginx重写地址
 rewrite ^/path(.*)$ $1 break;
-
 
 
 
