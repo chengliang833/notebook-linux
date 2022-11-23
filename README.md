@@ -470,6 +470,7 @@ ps -ef|grep tomcat|grep java|grep prjname|awk '{print $2}'
 (?=.*n)(?=.*_)^.*$
 ((?!_)(?!n).)*
 //不包含
+(?!.*abc)(?!.*_)^.*$
 (.*)((?!/).)+alert\((?!")+(?!')+
 ```
 
